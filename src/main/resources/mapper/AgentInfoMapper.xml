@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mavis.digg.mapper.AgentInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.mavis.digg.entity.po.AgentInfo">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="agentName" column="agent_name" jdbcType="VARCHAR"/>
+            <result property="agentUrl" column="agent_url" jdbcType="VARCHAR"/>
+            <result property="agentUsername" column="agent_username" jdbcType="VARCHAR"/>
+            <result property="agentPassword" column="agent_password" jdbcType="VARCHAR"/>
+            <result property="backup" column="backup" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,agent_name,agent_url,
+        agent_username,agent_password,backup
+    </sql>
+</mapper>
