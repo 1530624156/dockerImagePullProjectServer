@@ -32,7 +32,7 @@ public class AgentInfoServiceImpl extends ServiceImpl<AgentInfoMapper, AgentInfo
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("username", agent.getAgentUsername());
         paramMap.put("password", agent.getAgentPassword());
-        String restResultHtml = HttpUtil.post(url, JSONUtil.toJsonStr(paramMap),500000);
+        String restResultHtml = HttpUtil.post(url, JSONUtil.toJsonStr(paramMap),10000);
         if (MavisUtils.checkRestResultHtml(restResultHtml)){
             return true;
         }
