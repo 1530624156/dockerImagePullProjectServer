@@ -1,12 +1,17 @@
 package com.mavis.digg.service.impl;
 
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mavis.digg.entity.po.AgentInfo;
 import com.mavis.digg.service.AgentInfoService;
 import com.mavis.digg.mapper.AgentInfoMapper;
 import com.mavis.digg.utils.MavisUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 import static com.mavis.digg.constant.ApiConstant.TEST_URL;
 
@@ -24,7 +29,10 @@ public class AgentInfoServiceImpl extends ServiceImpl<AgentInfoMapper, AgentInfo
             return false;
         }
         String url = agent.getAgentUrl() + TEST_URL;
-        String restResultHtml = HttpUtil.get(url, 5000);
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("username", agent.getAgentUsername());
+        paramMap.put("password", agent.getAgentPassword());
+        String restResultHtml = HttpUtil.post(url, JSONUtil.toJsonStr(paramMap),500000);
         if (MavisUtils.checkRestResultHtml(restResultHtml)){
             return true;
         }
