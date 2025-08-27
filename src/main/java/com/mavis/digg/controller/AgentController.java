@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @since 2025/8/25 19:56
  */
 @RestController
-@RequestMapping("/agent")
+@RequestMapping("agent")
 public class AgentController {
 
     @Resource
@@ -27,7 +27,7 @@ public class AgentController {
      * @param agentId
      * @return
      */
-    @PostMapping("/test")
+    @PostMapping("test")
     public RestResult testAgent(String agentId){
         return agentLogic.testAgent(agentId);
     }
