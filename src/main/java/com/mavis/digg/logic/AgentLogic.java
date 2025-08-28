@@ -38,4 +38,24 @@ public class AgentLogic {
         }
         return RestResult.fail("测试节点失败!");
     }
+
+    public RestResult pullDockerImage(String agentId, String imageName, String imageTag) {
+        if (StringUtils.isBlank(agentId)){
+            return RestResult.fail("节点Id不能为空!");
+        }
+        if (StringUtils.isBlank(imageName)){
+            return RestResult.fail("镜像名称不能为空!");
+        }
+        if (StringUtils.isBlank(imageTag)){
+            return RestResult.fail("镜像标签不能为空!");
+        }
+        AgentInfo agent = agentInfoService.getById(agentId);
+        if (agent == null){
+            return RestResult.fail("节点不存在!");
+        }
+        boolean result = agentInfoService.pullDockerImage(agent, imageName, imageTag);
+        if (result){
+            return RestResult.success("拉取镜像成功!");
+        }
+    }
 }

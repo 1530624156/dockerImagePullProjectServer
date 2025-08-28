@@ -11,9 +11,8 @@ import com.mavis.digg.utils.MavisUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Objects;
 
-import static com.mavis.digg.constant.ApiConstant.TEST_URL;
+import static com.mavis.digg.constant.ApiConstant.*;
 
 /**
 * @author Administrator
@@ -28,10 +27,26 @@ public class AgentInfoServiceImpl extends ServiceImpl<AgentInfoMapper, AgentInfo
         if (agent == null){
             return false;
         }
-        String url = agent.getAgentUrl() + TEST_URL;
+        String url = agent.getAgentUrl() + SYSTEM_TEST_URL;
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("username", agent.getAgentUsername());
         paramMap.put("password", agent.getAgentPassword());
+        String restResultHtml = HttpUtil.post(url, JSONUtil.toJsonStr(paramMap),10000);
+        if (MavisUtils.checkRestResultHtml(restResultHtml)){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean pullDockerImage(AgentInfo agent, String imageName, String imageTag) {
+        if (agent == null){
+            return false;
+        }
+        String url = agent.getAgentUrl() + DOCKER_PULL_URL;
+        HashMap<String, Object> paramMap = new HashMap<>();
+        paramMap.put("imageName", imageName);
+        paramMap.put("imageTag", imageTag);
         String restResultHtml = HttpUtil.post(url, JSONUtil.toJsonStr(paramMap),10000);
         if (MavisUtils.checkRestResultHtml(restResultHtml)){
             return true;

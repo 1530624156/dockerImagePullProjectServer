@@ -31,4 +31,9 @@ public class AgentController {
     public RestResult testAgent(String agentId){
         return agentLogic.testAgent(agentId);
     }
+
+    @PostMapping("pullDockerImage")
+    public RestResult pullDockerImage(String agentId, String imageName, String imageTag){
+        return agentLogic.pullDockerImage(agentId,imageName,imageTag);
+    }
 }

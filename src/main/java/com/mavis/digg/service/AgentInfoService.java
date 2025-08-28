@@ -17,4 +17,6 @@ public interface AgentInfoService extends IService<AgentInfo> {
      */
     boolean testAgent(AgentInfo agent);
 
+    boolean pullDockerImage(AgentInfo agent, String imageName, String imageTag);
+
 }
